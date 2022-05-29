@@ -1,21 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Header} from '@rneui/base';
+import HeaderLayout from '../components/HeaderLayout';
 
 function ArticleList() {
   return (
     <View style={styles.container}>
-      <Header
-        backgroundColor="#6305dc"
-        barStyle="default"
-        centerComponent={{
-          text: 'HOME',
-          style: {color: '#fff'},
-        }}
-        centerContainerStyle={{}}
-        placement="center"
-        statusBarProps={{}}
-      />
+      <HeaderLayout text={'FEED'} />
       <Text>ArticleList</Text>
     </View>
   );
