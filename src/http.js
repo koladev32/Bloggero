@@ -7,9 +7,9 @@ async function listArticle() {
   return res.data;
 }
 
-const retrieveArticle = id => {
-  const res = axios.get(API_URL + 'articles/' + id);
+async function retrieveArticle(articleId) {
+  const res = await axios.get(API_URL + 'articles/' + articleId);
   return res.data;
-};
+}
 
 export {listArticle, retrieveArticle};

@@ -2,9 +2,15 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 function ArticleCard(props) {
-  const {title, description, author, image} = props;
+  const {id, title, description, author, image, navigation} = props;
+
+  const nagivate = () => {
+    navigation.navigate('ArticleDetail', {
+      articleId: id,
+    });
+  };
   return (
-    <TouchableOpacity style={styles.articleContainer}>
+    <TouchableOpacity onPress={nagivate} style={styles.articleContainer}>
       <View style={styles.articleSubContainer}>
         <Image style={styles.articleImage} source={{uri: image}} />
         <View style={styles.articleContentContainer}>
@@ -30,10 +36,11 @@ const styles = StyleSheet.create({
   },
   articleDescription: {
     paddingTop: 5,
+    fontStyle: 'italic',
   },
   articleAuthor: {
     fontSize: 14,
-    fontWeight: 'semibold',
+    fontWeight: '400',
     color: '#6305dc',
   },
   articleImage: {

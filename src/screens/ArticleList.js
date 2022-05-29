@@ -5,28 +5,30 @@ import {listArticle} from '../http';
 import ArticleCard from '../components/Card';
 import {Divider} from '@rneui/themed';
 
-function ArticleList() {
+function ArticleList({route, navigation}) {
   const [articles, setArticles] = React.useState([]);
 
   React.useEffect(() => {
-    listArticle().then(articles => setArticles(articles));
+    listArticle().then(res => setArticles(res));
   }, []);
 
   return (
     <View style={styles.container}>
       <HeaderLayout text={'FEED'} />
       <View style={styles.contentContainer}>
-        <Text style={styles.todayArticleTitle}>Today articles</Text>
+        <Text style={styles.todayArticleTitle}>Today's article</Text>
         <Divider />
         <ScrollView>
           {articles.map((article, index) => {
             return (
               <ArticleCard
                 key={article.id}
+                id={article.id}
                 title={article.title}
                 description={article.description}
                 author={article.author}
                 image={article.image}
+                navigation={navigation}
               />
             );
           })}

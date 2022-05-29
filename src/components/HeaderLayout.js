@@ -1,8 +1,19 @@
 import * as React from 'react';
-import {Header} from '@rneui/base';
+import {Header, Icon} from '@rneui/base';
+import {TouchableOpacity} from 'react-native';
 
 function HeaderLayout(props) {
-  const {text} = props;
+  const {text, hasGoback, navigation} = props;
+
+  const additionalProps = {};
+
+  if (hasGoback) {
+    additionalProps.leftComponent = () => (
+      <TouchableOpacity onPress={() => navigation.navigate('ArticleDetail')}>
+        <Icon name="arrow-back" size={24} color="#fff" />
+      </TouchableOpacity>
+    );
+  }
   return (
     <Header
       backgroundColor="#6305dc"
@@ -12,6 +23,7 @@ function HeaderLayout(props) {
         style: {color: '#fff'},
       }}
       placement="center"
+      {...additionalProps}
     />
   );
 }
