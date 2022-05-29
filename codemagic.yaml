@@ -1,0 +1,28 @@
+# Check out https://docs.codemagic.io/getting-started/building-a-react-native-app/ for more information
+# Please review and update values in curly braces
+
+
+workflows:
+    react-native-android:
+        name: Bloggero Android
+        max_build_duration: 120
+        instance_type: mac_mini
+        environment:
+            groups:
+                - bloggero-app    
+            vars:
+                CM_KEYSTORE_PASSWORD: Encrypted()
+                CM_KEY_PASSWORD: Encrypted()
+                CM_KEY_ALIAS: Encrypted()
+            node: 16.14.0
+        scripts:
+            - yarn install
+            - echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$CM_BUILD_DIR/android/local.properties"
+            - |
+                chmod -R 777 $CM_BUILD_DIR
+                echo $CM_KEYSTORE | base64 --decode > $CM_BUILD_DIR/keystore.jks
+                # build Android
+                cd android
+                ./gradlew assembleRelease
+        artifacts:
+            - android/app/build/outputs/**/*.apk
