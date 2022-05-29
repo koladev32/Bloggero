@@ -1,16 +1,27 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import ArticleDetail from './screens/ArticleDetail';
+import ArticleList from './screens/ArticleList';
 
-import ArticleList from '../screens/ArticleList';
-import ArticleDetail from '../screens/ArticleDetail';
-
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ArticleList" component={ArticleList} />
-      <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="ArticleList"
+        component={ArticleList}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="ArticleDetail"
+        component={ArticleDetail}
+      />
     </Stack.Navigator>
   );
 };
