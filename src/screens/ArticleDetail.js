@@ -1,8 +1,10 @@
-import { Divider } from '@rneui/base';
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import HeaderLayout from '../components/HeaderLayout';
+import PrivateContent from '../components/PrivateContent';
 import {retrieveArticle} from '../http';
+import {Divider} from '@rneui/base';
+
 
 function ArticleDetail({route, navigation}) {
   const {articleId} = route.params;
@@ -28,7 +30,11 @@ function ArticleDetail({route, navigation}) {
         <Divider />
         <Image style={styles.articleImage} source={{uri: article.image}} />
         <Divider />
-        <Text style={styles.articleContent}>{article.content}</Text>
+        {article.is_private ? (
+          <PrivateContent />
+        ) : (
+          <Text>{article.content}</Text>
+        )}
       </View>
     </View>
   );
