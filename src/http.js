@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/';
+const API_URL = 'https://bloggero-server.herokuapp.com/';
 
 async function listArticle() {
-  const res = await axios.get(API_URL + 'articles');
+  const res = await axios.get(API_URL + 'articles/');
   return res.data;
 }
 
