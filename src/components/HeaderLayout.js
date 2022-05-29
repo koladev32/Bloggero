@@ -9,7 +9,7 @@ function HeaderLayout(props) {
 
   if (hasGoback) {
     additionalProps.leftComponent = () => (
-      <TouchableOpacity onPress={() => navigation.navigate('ArticleDetail')}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <Icon name="arrow-back" size={24} color="#fff" />
       </TouchableOpacity>
     );

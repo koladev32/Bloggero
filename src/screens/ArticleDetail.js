@@ -9,13 +9,15 @@ import {Divider} from '@rneui/base';
 function ArticleDetail({route, navigation}) {
   const {articleId} = route.params;
 
+  console.log(route.params);
+
   const [article, setArticle] = React.useState({});
 
   React.useEffect(() => {
     retrieveArticle(articleId).then(res => {
       setArticle(res);
     });
-  }, [articleId]);
+  }, []);
 
   return (
     <View style={styles.container}>
