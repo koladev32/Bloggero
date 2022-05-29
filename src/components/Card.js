@@ -1,15 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 function ArticleCard(props) {
   const {title, description, author, image} = props;
   return (
-    <View style={styles.articleContainer}>
-      <Text style={styles.articleTitle}>{title}</Text>
-      <Text style={styles.articleAuthor}>{author}</Text>
-      <Image style={styles.articleImage} source={{uri: image}} />
-      <Text style={styles.articleDescription}>{description}</Text>
-    </View>
+    <TouchableOpacity style={styles.articleContainer}>
+      <View style={styles.articleSubContainer}>
+        <Image style={styles.articleImage} source={{uri: image}} />
+        <View style={styles.articleContentContainer}>
+          <Text style={styles.articleTitle}>{title}</Text>
+          <Text style={styles.articleAuthor}> by {author}</Text>
+          <Text style={styles.articleDescription}>{description}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -18,22 +22,31 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     backgroundColor: '#fff',
+    marginVertical: 5,
   },
   articleTitle: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   articleDescription: {
-    fontSize: 16,
+    paddingTop: 5,
   },
   articleAuthor: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: 'semibold',
+    color: '#6305dc',
   },
   articleImage: {
     width: 100,
     height: 100,
     borderRadius: 5,
+  },
+  articleSubContainer: {
+    flexDirection: 'row',
+  },
+  articleContentContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
   },
 });
 
