@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   articleAuthor: {
     fontSize: 14,
     fontWeight: '400',
-    color: '#6305dc',
+    color: '#000',
   },
   articleImage: {
     width: 100,

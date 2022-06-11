@@ -16,7 +16,7 @@ function HeaderLayout(props) {
   }
   return (
     <Header
-      backgroundColor="#6305dc"
+      backgroundColor="#000"
       barStyle="default"
       centerComponent={{
         text: text,

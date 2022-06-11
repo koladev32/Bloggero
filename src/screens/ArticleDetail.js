@@ -4,18 +4,21 @@ import HeaderLayout from '../components/HeaderLayout';
 import PrivateContent from '../components/PrivateContent';
 import {retrieveArticle} from '../http';
 import {Divider} from '@rneui/base';
-
+import PayModal from '../components/PayModal';
 
 function ArticleDetail({route, navigation}) {
   const {articleId} = route.params;
 
-  console.log(route.params);
-
   const [article, setArticle] = React.useState({});
+
+  // const [privateContent, setPrivateContent] = React.useState(false);
 
   React.useEffect(() => {
     retrieveArticle(articleId).then(res => {
       setArticle(res);
+      // if (res.is_private) {
+      //   setPrivateContent(true);
+      // }
     });
   }, []);
 
@@ -32,12 +35,9 @@ function ArticleDetail({route, navigation}) {
         <Divider />
         <Image style={styles.articleImage} source={{uri: article.image}} />
         <Divider />
-        {article.is_private ? (
-          <PrivateContent />
-        ) : (
-          <Text>{article.content}</Text>
-        )}
+        <Text>{article.content}</Text>
       </View>
+      <PayModal isOpen={article?.is_private} />
     </View>
   );
 }
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   articleAuthor: {
-    color: '#6305dc',
+    color: '#000',
     paddingHorizontal: 10,
   },
   contentContainer: {
