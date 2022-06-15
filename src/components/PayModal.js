@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 
 const PayModal = props => {
-  const {isOpen} = props;
+  const {isOpen, navigation} = props;
   const [modalVisible, setModalVisible] = useState(isOpen);
 
   return (
@@ -21,9 +21,14 @@ const PayModal = props => {
               Enjoy your private content! No ads or tracking.
             </Text>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonSubscription]}
               onPress={() => console.log('Closed.')}>
               <Text style={styles.textStyle}>Upgrade for $US 5,99 / month</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => navigation.goBack()}>
+              <Text style={styles.textStyleClose}>Go back</Text>
             </Pressable>
           </View>
         </View>
@@ -36,7 +41,7 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',
-    height: '100%',
+    height: '80%',
   },
   modalView: {
     backgroundColor: 'white',
@@ -57,12 +62,22 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    marginTop: 8,
   },
   buttonClose: {
+    backgroundColor: '#fff',
+    color: '#000',
+  },
+  buttonSubscription: {
     backgroundColor: '#000',
   },
   textStyle: {
     color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  textStyleClose: {
+    color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
   },

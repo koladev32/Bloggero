@@ -22,6 +22,8 @@ function ArticleDetail({route, navigation}) {
     });
   }, []);
 
+  console.log(article)
+
   return (
     <View style={styles.container}>
       <HeaderLayout
@@ -37,7 +39,7 @@ function ArticleDetail({route, navigation}) {
         <Divider />
         <Text>{article.content}</Text>
       </View>
-      <PayModal isOpen={article?.is_private} />
+      <PayModal navigation={navigation} isOpen={article.is_private} />
     </View>
   );
 }
