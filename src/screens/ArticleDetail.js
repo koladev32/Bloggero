@@ -8,30 +8,43 @@ import PayModal from '../components/PayModal';
 function ArticleDetail({route, navigation}) {
   const {articleId} = route.params;
 
-  const [article, setArticle] = React.useState({});
+  const [article, setArticle] = React.useState(null);
+
+  const [privateContent, setPrivateContent] = React.useState();
 
   React.useEffect(() => {
     retrieveArticle(articleId).then(res => {
       setArticle(res);
+      if (res.is_private) {
+        setPrivateContent(true);
+      }
     });
   }, []);
+
+  console.log(article, privateContent);
 
   return (
     <View style={styles.container}>
       <HeaderLayout
-        text={article.title}
+        text={article?.title}
         hasGoback={true}
         navigation={navigation}
       />
-      <View style={styles.contentContainer}>
-        <Text style={styles.articleAuthor}>by {article.author}</Text>
-        <Text style={styles.articleDescription}>{article.description}</Text>
-        <Divider />
-        <Image style={styles.articleImage} source={{uri: article.image}} />
-        <Divider />
-        <Text>{article.content}</Text>
-      </View>
-      <PayModal navigation={navigation} isOpen={article.is_private} />
+      {article ? (
+        <>
+          <View style={styles.contentContainer}>
+            <Text style={styles.articleAuthor}>by {article.author}</Text>
+            <Text style={styles.articleDescription}>{article.description}</Text>
+            <Divider />
+            <Image style={styles.articleImage} source={{uri: article.image}} />
+            <Divider />
+            <Text>{article.content}</Text>
+          </View>
+          <PayModal navigation={navigation} isOpen={article.is_private} />
+        </>
+      ) : (
+        <Text>Loading</Text>
+      )}
     </View>
   );
 }

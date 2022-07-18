@@ -15,6 +15,8 @@ function ArticleList({route, navigation}) {
     listArticle().then(res => setArticles(res));
   }, []);
 
+  console.log(articles)
+
   React.useEffect(() => {
     // Get current available packages
     const getPackages = async () => {
