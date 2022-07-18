@@ -138,7 +138,7 @@ android {
         applicationId "com.bloggero"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 3
         versionName "1.0.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
@@ -285,6 +285,13 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+dependencies {
+    def billing_version = "5.0.0"
+
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
+}
+
 
 if (isNewArchitectureEnabled()) {
     // If new architecture is enabled, we let you build RN from source

@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import HeaderLayout from '../components/HeaderLayout';
-import PrivateContent from '../components/PrivateContent';
 import {retrieveArticle} from '../http';
 import {Divider} from '@rneui/base';
 import PayModal from '../components/PayModal';
@@ -11,18 +10,11 @@ function ArticleDetail({route, navigation}) {
 
   const [article, setArticle] = React.useState({});
 
-  // const [privateContent, setPrivateContent] = React.useState(false);
-
   React.useEffect(() => {
     retrieveArticle(articleId).then(res => {
       setArticle(res);
-      // if (res.is_private) {
-      //   setPrivateContent(true);
-      // }
     });
   }, []);
-
-  console.log(article)
 
   return (
     <View style={styles.container}>
