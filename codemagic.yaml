@@ -50,5 +50,5 @@ workflows:
                   failure: false    # To not receive a notification when a build fails
             google_play:
               credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-              track: closed
+              track: Revenuecat
               submit_as_draft: true
