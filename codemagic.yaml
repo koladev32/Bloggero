@@ -37,7 +37,7 @@ workflows:
             
             - name: Building Debug artifacts
               script: |
-                chmod -R 777 $FCI_BUILD_DIR
+                chmod -R 777 $CM_BUILD_DIR
                 cd android && ./gradlew assembleRelease 
                           
             
