@@ -1,27 +1,47 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import HeaderLayout from '../components/HeaderLayout';
 import {retrieveArticle} from '../http';
 import {Divider} from '@rneui/base';
 import PayModal from '../components/PayModal';
+import Purchases from 'react-native-purchases';
+import {Context} from '../../App';
 
 function ArticleDetail({route, navigation}) {
   const {articleId} = route.params;
+  const {user, setUser} = useContext(Context);
 
   const [article, setArticle] = React.useState(null);
 
-  const [privateContent, setPrivateContent] = React.useState();
+  const [selectedPackage, setSelectedPackage] = React.useState({});
+
+  React.useEffect(() => {
+    Purchases.setDebugLogsEnabled(true);
+
+    Purchases.setup('goog_JurvcuZoTfhVTxspjpEoIvDJEhd', null, false);
+
+    const getPackages = async () => {
+      try {
+        const offerings = await Purchases.getOfferings();
+        if (
+          offerings.current !== null &&
+          offerings.current.availablePackages.length !== 0
+        ) {
+          setSelectedPackage(offerings.current.availablePackages[0]);
+        }
+      } catch (e) {
+        console.error('Error getting offers', e.message);
+      }
+    };
+
+    getPackages();
+  }, []);
 
   React.useEffect(() => {
     retrieveArticle(articleId).then(res => {
       setArticle(res);
-      if (res.is_private) {
-        setPrivateContent(true);
-      }
     });
-  }, []);
-
-  console.log(article, privateContent);
+  }, [articleId, user]);
 
   return (
     <View style={styles.container}>
@@ -40,7 +60,11 @@ function ArticleDetail({route, navigation}) {
             <Divider />
             <Text>{article.content}</Text>
           </View>
-          <PayModal navigation={navigation} isOpen={article.is_private} />
+          <PayModal
+            navigation={navigation}
+            isOpen={article.is_private && !user.has_subscribed}
+            selectedPackage={selectedPackage}
+          />
         </>
       ) : (
         <Text>Loading</Text>

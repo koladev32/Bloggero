@@ -21,6 +21,8 @@ target 'Bloggero' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNPurchases', :path => '../node_modules/react-native-purchases'
+
   target 'BloggeroTests' do
     inherit! :complete
     # Pods for testing

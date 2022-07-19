@@ -5,38 +5,12 @@ import {listArticle} from '../http';
 import ArticleCard from '../components/Card';
 import {Divider} from '@rneui/themed';
 
-import Purchases from 'react-native-purchases';
-
 function ArticleList({route, navigation}) {
   const [articles, setArticles] = React.useState([]);
-  const [packages, setPackages] = React.useState([]);
 
   React.useEffect(() => {
     listArticle().then(res => setArticles(res));
   }, []);
-
-  console.log(articles)
-
-  React.useEffect(() => {
-    // Get current available packages
-    const getPackages = async () => {
-      try {
-        const offerings = await Purchases.getOfferings();
-        if (
-          offerings.current !== null &&
-          offerings.current.availablePackages.length !== 0
-        ) {
-          setPackages(offerings.current.availablePackages);
-        }
-      } catch (e) {
-        console.error('Error getting offers', e.message);
-      }
-    };
-
-    getPackages();
-  }, []);
-
-  console.log(packages);
 
   return (
     <View style={styles.container}>

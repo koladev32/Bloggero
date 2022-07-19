@@ -12,4 +12,22 @@ async function retrieveArticle(articleId) {
   return res.data;
 }
 
-export {listArticle, retrieveArticle};
+async function getUser(userId) {
+  const res = await axios.get(API_URL + 'users/' + userId);
+  return res.data;
+}
+
+async function subscribeUser(userId) {
+  const res = await axios.patch(
+    API_URL + 'users/' + userId,
+    {
+      has_subscribed: true,
+    },
+    {
+      headers: {'Content-Type': 'application/json'},
+    },
+  );
+  return res.data;
+}
+
+export {listArticle, retrieveArticle, getUser, subscribeUser};

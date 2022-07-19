@@ -1,9 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import Purchases from 'react-native-purchases';
+import {Context} from '../../App';
+import {subscribeUser} from '../http';
 
 const PayModal = props => {
-  const {isOpen, navigation} = props;
+  const {selectedPackage, isOpen, navigation} = props;
   const [modalVisible, setModalVisible] = useState(isOpen);
+  const {user, setUser} = useContext(Context);
+
+  const handlePurchasePackage = async () => {
+    try {
+      const {purchaserInfo, productIdentifier} =
+        await Purchases.purchasePackage(selectedPackage);
+      subscribeUser(user.id)
+        .then(data => setUser(data))
+        .catch(err => console.error(err));
+    } catch (e) {
+      if (!e.userCancelled) {
+        console.log(e);
+      }
+    }
+  };
 
   return (
     <View>
@@ -22,7 +40,7 @@ const PayModal = props => {
             </Text>
             <Pressable
               style={[styles.button, styles.buttonSubscription]}
-              onPress={() => console.log('Closed.')}>
+              onPress={() => handlePurchasePackage()}>
               <Text style={styles.textStyle}>Upgrade for $US 5,99 / month</Text>
             </Pressable>
             <Pressable
