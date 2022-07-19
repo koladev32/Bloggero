@@ -14,7 +14,10 @@ const PayModal = props => {
       const {purchaserInfo, productIdentifier} =
         await Purchases.purchasePackage(selectedPackage);
       subscribeUser(user.id)
-        .then(data => setUser(data))
+        .then(data => {
+          setUser(data);
+          setModalVisible(false);
+        })
         .catch(err => console.error(err));
     } catch (e) {
       if (!e.userCancelled) {
