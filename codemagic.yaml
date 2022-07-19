@@ -34,15 +34,10 @@ workflows:
                     UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
                 fi
                 cd android && ./gradlew bundleRelease -PversionCode=$UPDATED_BUILD_NUMBER -PversionName=1.0.$UPDATED_BUILD_NUMBER
-            
-            - name: Building Debug artifacts
-              script: |
-                chmod -R 777 $CM_BUILD_DIR
-                cd android && ./gradlew assembleRelease
-                          
-            
+
+                                      
         artifacts:
-            - android/app/build/outputs/**/*.apk
+            - android/app/build/outputs/**/*.aab
 
         publishing:
             email:
@@ -54,3 +49,4 @@ workflows:
             google_play:
               credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
               track: closed
+              submit_as_draft: true
