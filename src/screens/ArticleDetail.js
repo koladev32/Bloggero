@@ -16,9 +16,6 @@ function ArticleDetail({route, navigation}) {
   const [selectedPackage, setSelectedPackage] = React.useState({});
 
   React.useEffect(() => {
-    Purchases.setDebugLogsEnabled(true);
-
-    Purchases.setup('goog_JurvcuZoTfhVTxspjpEoIvDJEhd', null, false);
 
     const getPackages = async () => {
       try {
