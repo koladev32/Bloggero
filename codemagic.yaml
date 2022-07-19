@@ -38,7 +38,7 @@ workflows:
             - name: Building Debug artifacts
               script: |
                 chmod -R 777 $CM_BUILD_DIR
-                cd android && ./gradlew assembleRelease 
+                cd android && ./gradlew assembleRelease -PversionCode=$UPDATED_BUILD_NUMBER -PversionName=1.0.$UPDATED_BUILD_NUMBER
                           
             
         artifacts:
