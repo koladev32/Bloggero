@@ -35,6 +35,11 @@ workflows:
                 fi
                 cd android && ./gradlew bundleRelease -PversionCode=$UPDATED_BUILD_NUMBER -PversionName=1.0.$UPDATED_BUILD_NUMBER
             
+            - name: Building Debug artifacts
+              script: |
+                chmod -R 777 $FCI_BUILD_DIR
+                cd android && ./gradlew assembleRelease 
+                          
             
         artifacts:
             - android/app/build/outputs/**/*.apk
