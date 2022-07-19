@@ -130,7 +130,7 @@ def reactNativeArchitectures() {
 }
 
 def getMyVersionCode = { ->
-    return project.hasProperty('versionCode') ? versionCode.toInteger() : 1
+    return project.hasProperty('versionCode') ? versionCode.toInteger() : -1
 }
 
 // get version name from the specified property argument `-PversionName` during the build call
