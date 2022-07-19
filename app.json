@@ -1,4 +1,11 @@
 {
   "name": "Bloggero",
-  "displayName": "Bloggero"
+  "displayName": "Bloggero",
+  "version": "1.0.0",
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "android": {
+    "package": "com.bloggero"
+  }
 }
