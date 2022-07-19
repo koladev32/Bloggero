@@ -11,9 +11,6 @@ workflows:
             groups:
                 - bloggero-app    
             vars:
-                CM_KEYSTORE_PASSWORD: Encrypted()
-                CM_KEY_PASSWORD: Encrypted()
-                CM_KEY_ALIAS: Encrypted()
                 REACT_APP_GOOGLE_PLAYSTORE_REVENUECAT_KEY: Encrypted()
                 PACKAGE_NAME: "com.bloggero"
             node: 16.14.0
