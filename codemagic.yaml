@@ -16,12 +16,14 @@ workflows:
             node: 16.14.0
         scripts:
             - name: Set up keystore
-              script: |
+              script: | 
                 echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
-                        
-            - yarn install
-            - echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$CM_BUILD_DIR/android/local.properties
-
+            - name: Install yarn dependencies
+              script: | 
+                yarn install
+            - name: Set Android SDK location
+              script: | 
+                echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
             - name: Build Android release
               script: | 
                 LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name '$PACKAGE_NAME')
